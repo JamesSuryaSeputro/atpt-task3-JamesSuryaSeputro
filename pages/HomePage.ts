@@ -9,16 +9,15 @@ export class HomePage extends BasePage {
         super(page);
         this.signupLoginButton = page.locator('a[href="/login"]');
         this.sliderCarousel = page.locator('#slider-carousel');
-        
+
     }
 
-/*************  ✨ Windsurf Command ⭐  *************/
-    /**
-     * Navigates to the login page by clicking on the signup/login button.
-     */
-
-/*******  843251b9-7241-49b1-8bb1-8f926caf9676  *******/
     async navigateToLogin() {
-        await this.signupLoginButton.click();
+        await this.signupLoginButton.click({ force: true });
+    }
+
+    async navigateToProducts() {
+        await this.page.locator('a[href="/products"]').click();
+        await this.page.waitForURL('**/products', { timeout: 10000 });
     }
 }

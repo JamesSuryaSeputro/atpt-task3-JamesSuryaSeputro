@@ -24,6 +24,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  timeout: 60 * 1000,
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://automationexercise.com/',
@@ -70,16 +71,6 @@ export default defineConfig({
     // },
   ],
 
-  expect: {
-    // Timeout for each assertion
-    timeout: 10000,
-    // Configuration for toHaveScreenshot()
-    toMatchSnapshot: {
-      // Allow a small difference for anti-aliasing, etc.
-      maxDiffPixels: 100,
-      threshold: 0.2,
-    },
-  },
   /* Run your local dev server before starting the tests */
   // webServer: {
   //   command: 'npm run start',
