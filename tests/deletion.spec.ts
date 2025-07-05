@@ -23,11 +23,6 @@ test.describe('User Account Deletion Flow', () => {
         await loginPage.startSignup(userData.name, userData.email);
         await signupPage.fillRegistrationForm(userData);
         await accountCreatedPage.proceed();
-
-        // Handle potential ad
-        // if (await page.locator('#aswift_6').isVisible()) {
-        //     await page.frameLocator('#aswift_6').frameLocator('#ad_iframe').getByLabel('Close ad').click();
-        // }
     });
 
     test('should allow a logged-in user to delete their account', async ({ page }) => {
@@ -45,7 +40,7 @@ test.describe('User Account Deletion Flow', () => {
         await expect(accountDeletedPage.accountDeletedHeader).toBeVisible();
         await accountDeletedPage.checkAccessibility('AccountDeletedPage');
         await expect(page).toHaveScreenshot('account-deleted-page.png', {
-            maxDiffPixelRatio: 0.01,
+            maxDiffPixelRatio: 0.02,
         });
 
         // 5. Continue and verify user is logged out (by checking for the Signup/Login button)

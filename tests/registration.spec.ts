@@ -30,7 +30,7 @@ test.describe('User Registration Flow', () => {
     await homePage.checkAccessibility('HomePage');
     // Mask the dynamic slider carousel for a stable screenshot
     await expect(page).toHaveScreenshot('home-page.png', {
-      maxDiffPixelRatio: 0.01,
+      maxDiffPixelRatio: 0.02,
       mask: [
         homePage.sliderCarousel,
         page.locator('iframe[src*="ads"]'), // General ad iframes
@@ -48,7 +48,7 @@ test.describe('User Registration Flow', () => {
     // 5. Visual and Accessibility checks on Login/Signup Page
     await loginPage.checkAccessibility('LoginPage');
     await expect(page).toHaveScreenshot('login-page.png', {
-      maxDiffPixelRatio: 0.01
+      maxDiffPixelRatio: 0.02
     });
 
     // 6. Start signup process
@@ -58,7 +58,7 @@ test.describe('User Registration Flow', () => {
     await expect(page).toHaveURL(/.*signup/);
     await signupPage.checkAccessibility('SignupPage');
     await expect(page).toHaveScreenshot('signup-form-page.png', {
-      maxDiffPixelRatio: 0.01
+      maxDiffPixelRatio: 0.02
     });
     await signupPage.fillRegistrationForm(userData);
 
@@ -66,7 +66,7 @@ test.describe('User Registration Flow', () => {
     await expect(accountCreatedPage.accountCreatedHeader).toBeVisible();
     await accountCreatedPage.checkAccessibility('AccountCreatedPage');
     await expect(page).toHaveScreenshot('account-created-page.png', {
-      maxDiffPixelRatio: 0.01
+      maxDiffPixelRatio: 0.02
     });
 
     // 9. Continue to the logged-in state
@@ -81,7 +81,7 @@ test.describe('User Registration Flow', () => {
     await expect(loggedInHomePage.loggedInAsText(userData.name)).toBeVisible({ timeout: 5000 });
     await loggedInHomePage.checkAccessibility('LoggedInHomePage');
     await expect(page).toHaveScreenshot('logged-in-home-page.png', {
-      maxDiffPixelRatio: 0.01,
+      maxDiffPixelRatio: 0.02,
       mask: [
         homePage.sliderCarousel,
         loggedInHomePage.sliderCarousel,

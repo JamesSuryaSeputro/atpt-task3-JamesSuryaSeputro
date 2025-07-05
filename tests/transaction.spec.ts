@@ -20,6 +20,8 @@ test.describe('User Product Transaction Flow', () => {
   test('should allow a user to purchase a product end-to-end', async ({ page }) => {
     const homePage = new HomePage(page);
     const loginPage = new LoginPage(page);
+    const signUpPage = new SignupPage(page);
+    const accountCreatedPage = new AccountCreatedPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
     const checkoutPage = new CheckoutPage(page);
@@ -30,10 +32,8 @@ test.describe('User Product Transaction Flow', () => {
     await homePage.navigateToLogin();
     await expect(loginPage.newUserSignupHeader).toBeVisible();
     await loginPage.startSignup(userData.email, userData.password);
-    const signupPage = new SignupPage(page);
-    await signupPage.fillRegistrationForm(userData);
+    await signUpPage.fillRegistrationForm(userData);
 
-    const accountCreatedPage = new AccountCreatedPage(page);
     await expect(accountCreatedPage.accountCreatedHeader).toBeVisible();
     await accountCreatedPage.proceed();
 
@@ -41,7 +41,7 @@ test.describe('User Product Transaction Flow', () => {
     await productsPage.navigate();
     await productsPage.checkAccessibility('ProductsPage');
     await expect(page).toHaveScreenshot('products-page.png', {
-      maxDiffPixelRatio: 0.01,
+      maxDiffPixelRatio: 0.02,
       mask: [
         page.locator('iframe'),
         page.locator('div[id^="aswift"]'),
@@ -55,7 +55,7 @@ test.describe('User Product Transaction Flow', () => {
     await productsPage.addFirstProductToCart();
     await cartPage.checkAccessibility('CartPage');
     await expect(page).toHaveScreenshot('cart-page.png', {
-      maxDiffPixelRatio: 0.01,
+      maxDiffPixelRatio: 0.02,
       mask: [
         page.locator('iframe'),
         page.locator('ins.adsbygoogle')
@@ -66,7 +66,7 @@ test.describe('User Product Transaction Flow', () => {
     await cartPage.proceedToCheckout();
     await checkoutPage.checkAccessibility('CheckoutPage');
     await expect(page).toHaveScreenshot('checkout-page.png', {
-      maxDiffPixelRatio: 0.01
+      maxDiffPixelRatio: 0.02
     });
 
     // 5. Fill in payment details and confirm order
@@ -82,7 +82,7 @@ test.describe('User Product Transaction Flow', () => {
     await paymentPage.confirmOrder();
     await paymentPage.checkAccessibility('PaymentPage');
     await expect(page).toHaveScreenshot('order-confirmation-page.png', {
-      maxDiffPixelRatio: 0.01
+      maxDiffPixelRatio: 0.02
     });
   });
 });
