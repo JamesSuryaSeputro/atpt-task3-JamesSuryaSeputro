@@ -1,6 +1,5 @@
 import { Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { removeAdsScript } from '../utils/hideAds';
 
 export class BasePage {
     readonly page: Page;
